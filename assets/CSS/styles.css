@@ -1,0 +1,23 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+
+
+.title {
+    color: white;
+    font-size: 60px;
+    font-family: 'Roboto Slab', serif;
+    border: solid 2px black;
+}
+
+.search {
+    font-size: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.search-form {
+    border-bottom: solid black 3px;
+    padding: 20px;
+}
+
+.city-info {
+}
