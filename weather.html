@@ -17,8 +17,9 @@
         <div class="container col-3" >
             <h2 class="search">Search Cities:</h2>
             <form id="user-form" class="search-form">
-                <input type="text" id="cityVal" placeholder="City Name" class="w-100"><br>
-                <input type="submit" id="search-button" value="search" class="btn-secondary w-100">
+                <input type="text" id="cityVal" placeholder="City Name" class="w-100" list="searchdata"><br>
+                <button type="submit" id="search-button" value="search" class="btn-secondary w-100">Search</button>
+                <datalist id="searchdata"></datalist>
             </form> 
 
             <ul>
@@ -27,17 +28,17 @@
         </div>
 
         <div class="container col-9">
-            <div class="col-12 col-md-9 border border-3 rounded border-info w-auto h-100">
-                <h2 id="city-name"></h2>
-
+            <div class="col-12 col-md-9 border border-3 rounded border-info w-auto h-100 p-3">
+                <div id="titleEl" class="d-flex">
+                    <h2 id="city-name"></h2>
+                </div>
                 <div id="city-temp" class="list-group">
-
                 </div>
             </div>
 
             <div>
                 <h3>5-day Forecast:</h3>
-                <div class="card"></div>
+                <div id="forecast-cards" class="forecast-list d-flex col justify-content-lg-around"></div>
             </div>
         </div>
     </main>

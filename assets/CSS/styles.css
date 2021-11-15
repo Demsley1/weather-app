@@ -19,3 +19,10 @@
     padding: 20px;
 }
 
+.moderate {
+    background-color: yellow;
+}
+
+.normal {
+    background-color: green;
+}
