@@ -138,7 +138,9 @@ $(document).ready(function() {
                     var dDate = dailyTemp.dt
                     var dTemp = dailyTemp.temp.day
                     var dWind = dailyTemp.wind_speed
-                    var dHum =dailyTemp.humidity
+                    var dHum = dailyTemp.humidity
+                    var dIcon = dailyTemp.weather[0].icon
+                    var tempPic = ("http://openweathermap.org/img/wn/"+dIcon+"@2x.png")
                     showDate = dayjs.unix(dDate);
 
                     var forecastEl = document.createElement("div")
@@ -147,6 +149,10 @@ $(document).ready(function() {
                     var forecastTitle = document.createElement('h3')
                     forecastTitle.textContent = (showDate);
                     forecastTitle.classList = "card-title";
+
+                    var iconEl = document.createElement("img")
+                    $(iconEl).attr("src", tempPic)
+                    iconEl.classList = "card-img-top w-50"
 
                     var forecastBody = document.createElement('div')
                     forecastBody.classList = "card-body";
@@ -170,6 +176,7 @@ $(document).ready(function() {
 
                     //append card title and card body dive into card element
                     $(forecastEl).append(forecastTitle)
+                    $(forecastEl).append(iconEl)
                     $(forecastEl).append(forecastBody)
 
                     // append forecast el to HTML DOM 
@@ -192,14 +199,24 @@ $(document).ready(function() {
                 localStorage.searchHistory = JSON.stringify(searchHistory);
             });
 
-            document.querySelector("#cityVal").addEventListener("focus", () => {
+            var searchData = localStorage.getItem("searchHistory");
+            
+            $(searchData).Each((search) => {
+                var searchName = document.createElement("li")
+                searchName.textContent = search
+                console.log(searchName);
+            });
+
+            /*document.querySelector("#cityVal").addEventListener("focus", () => {
                 var data = document.querySelector("datalist#searchdata");
                 data.innerHTML = "";
+                
                 searchHistory.forEach((search) => {
+                    $("#search-list").append(searchName);
                     data.innerHTML = "<option>" + data.innerHTML;
                     data.querySelector("option").innerText = search;
                 });
-            });
+            });*/
         }
 
     formEl.addEventListener("submit", getCityInfo);
