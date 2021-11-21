@@ -187,6 +187,7 @@ $(document).ready(function() {
             }
 
             dailyForecast(temp);
+            
         }  
 
 
