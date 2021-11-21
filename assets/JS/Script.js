@@ -99,13 +99,13 @@ $(document).ready(function() {
 
             // Name the title for each div and parse value attributed to title
             var tempTitle = document.createElement("span")
-            tempTitle.textContent = ("Temperature:" + tempOfCity + "°F");
+            tempTitle.textContent = ("Temperature:  " + tempOfCity + " °F");
             var windTitle = document.createElement("span")
-            windTitle.textContent = ("Wind Speed:"+ wind + "MPH");
+            windTitle.textContent = ("Wind Speed:  "+ wind + "  MPH");
             var humTitle = document.createElement("span")
-            humTitle.textContent = ("Humidity:" + hum + "%");
+            humTitle.textContent = ("Humidity:  " + hum + " %");
             var uviTitle = document.createElement("span")
-            uviTitle.textContent = ("UV Index:" + uvi);
+            uviTitle.textContent = ("UV Index:  " + uvi);
             // attempt to create if else conditional statement to change color of element depending of value of the uv index
             if(uvi.value >= 3 && uvi.value <= 5) {
                 uviTitle.classList = "moderate"
@@ -158,15 +158,15 @@ $(document).ready(function() {
                     forecastBody.classList = "card-body";
 
                     var forecastTemp = document.createElement('p')
-                    forecastTemp.textContent = ("Temp:" + dTemp + "°F")
+                    forecastTemp.textContent = ("Temp:  " + dTemp + " °F")
                     forecastTemp.classList= "card-text";
 
                     var forecastWind = document.createElement('p')
-                    forecastWind.textContent = ("Wind:" + dWind + "MPH")
+                    forecastWind.textContent = ("Wind:  " + dWind + "  MPH")
                     forecastWind.classList = "card-text";
 
                     var forecastHum = document.createElement('p')
-                    forecastHum.textContent = ("Humidity:" + dHum + "%")
+                    forecastHum.textContent = ("Humidity:  " + dHum + " %")
                     forecastHum.classList = "card-text";
 
                     // append all p elements into card body div
@@ -192,20 +192,21 @@ $(document).ready(function() {
 
     }
         var saveSearch = function() {
-            var searchHistory = (localStorage.searchHistory) ? JSON.parse(localStorage.searchHistory) : [];
+            var searchHistory = (sessionStorage.searchHistory) ? JSON.parse(sessionStorage.searchHistory) : [];
             
             document.querySelector("#search-button").addEventListener("click", () => {
                 searchHistory.push(document.querySelector("#cityVal").value);
-                localStorage.searchHistory = JSON.stringify(searchHistory);
+                //sessionStorage.searchHistory = JSON.stringify(searchHistory);
             });
 
-            var searchData = localStorage.getItem("searchHistory");
+            var searchData = sessionStorage.getItem("searchHistory");
             
-            $(searchData).Each((search) => {
+            
+            for (let i = 0; i < searchData.length; i++) {
                 var searchName = document.createElement("li")
-                searchName.textContent = search
+                searchName.textContent = searchData[i]
                 console.log(searchName);
-            });
+            };
 
             /*document.querySelector("#cityVal").addEventListener("focus", () => {
                 var data = document.querySelector("datalist#searchdata");
@@ -223,9 +224,3 @@ $(document).ready(function() {
     formEl.addEventListener("submit", saveSearch);
    
 });
-
-
-
-
-
-
