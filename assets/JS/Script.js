@@ -5,6 +5,8 @@ $(document).ready(function() {
     // variable to target city name h2 element
     var cityTitle = document.querySelector("#city-name")
     // var forecast = document.querySelector(".forecast-list")
+    var titleEl = document.querySelector('#titleEl')
+    
 
     
     // main function to fetch api, then parse rsponsei nto json to be be used and appended to the page
@@ -53,9 +55,9 @@ $(document).ready(function() {
             $(iconEl).attr("src", tempPic);
 
             // append city name, day, and icon image to page
-            cityTitle.textContent = "";
-            $( "#city-name" ).append( city + ':' + '('+(day.$M+1)+'/'+day.$D+'/'+day.$y+')'); 
-            $( "#titleEl" ).append(iconEl);
+            $(titleEl).text(" ");
+            $( titleEl ).append( city + ':' + '('+(day.$M+1)+'/'+day.$D+'/'+day.$y+')'); 
+            $( titleEl ).append(iconEl);
         }
     }
 
@@ -127,12 +129,14 @@ $(document).ready(function() {
             $(listCon).append(uviEl)
             
             // Append to page with id =
+            $("#city-temp").text(" ")
             $("#city-temp").append(listCon)
 
 
             
             
             var dailyForecast = function(temp) {
+                $("#forecast-cards").text(" ")
                 for(let i = 1; i < 6; i++){
                     var dailyTemp = temp.daily[i];
                     var dDate = dailyTemp.dt
@@ -144,7 +148,7 @@ $(document).ready(function() {
                     showDate = dayjs.unix(dDate);
 
                     var forecastEl = document.createElement("div")
-                    forecastEl.classList = "card";
+                    forecastEl.classList = "card border-2 border-dark";
 
                     var forecastTitle = document.createElement('h3')
                     forecastTitle.textContent = (showDate);
