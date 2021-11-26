@@ -2,10 +2,8 @@ $(document).ready(function() {
     // target user form and target form input value
     var formEl = document.querySelector("#user-form")
     var cityNameEl = document.querySelector("#cityVal")
-    // variable to target city name h2 element
-    var cityTitle = document.querySelector("#city-name")
-    // var forecast = document.querySelector(".forecast-list")
     var titleEl = document.querySelector('#titleEl')
+    const searchList = document.querySelector("#searchList")
     
 
     
@@ -48,6 +46,7 @@ $(document).ready(function() {
             // get data of icon id from open weather api formatted as a json object
             var iconData = cityData.weather[0];
             var iconVal = iconData.icon
+            var cityName = cityData.name
             // create an element for icon representing weather
             var iconEl = document.createElement("img")
             // source picture for icon from openweather website
@@ -56,9 +55,11 @@ $(document).ready(function() {
 
             // append city name, day, and icon image to page
             $(titleEl).text(" ");
-            $( titleEl ).append( city + ':' + '('+(day.$M+1)+'/'+day.$D+'/'+day.$y+')'); 
+            $( titleEl ).append( cityName + ':' + '('+(day.$M+1)+'/'+day.$D+'/'+day.$y+')'); 
             $( titleEl ).append(iconEl);
+            saveSearch(cityName);
         }
+
     }
 
     var oneCall = function(coords) {
@@ -148,7 +149,7 @@ $(document).ready(function() {
                     showDate = dayjs.unix(dDate);
 
                     var forecastEl = document.createElement("div")
-                    forecastEl.classList = "card border-2 border-dark";
+                    forecastEl.classList = "card border-2 border-dark bg-primary bg-gradient";
 
                     var forecastTitle = document.createElement('h3')
                     forecastTitle.textContent = (showDate);
@@ -159,7 +160,7 @@ $(document).ready(function() {
                     iconEl.classList = "card-img-top w-50"
 
                     var forecastBody = document.createElement('div')
-                    forecastBody.classList = "card-body";
+                    forecastBody.classList = "card-body fs-4";
 
                     var forecastTemp = document.createElement('p')
                     forecastTemp.textContent = ("Temp:  " + dTemp + " °F")
@@ -196,36 +197,35 @@ $(document).ready(function() {
 
 
     }
-        var saveSearch = function() {
-            var searchHistory = (sessionStorage.searchHistory) ? JSON.parse(sessionStorage.searchHistory) : [];
-            
-            document.querySelector("#search-button").addEventListener("click", () => {
-                searchHistory.push(document.querySelector("#cityVal").value);
-                //sessionStorage.searchHistory = JSON.stringify(searchHistory);
-            });
+    
+        var saveSearch = (city) => {
+            var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+            const  cityName = [];
+            cityName.push(city);
+            searchHistory.indexOf(city) === -1 ? searchHistory.push(city) : []
 
-            var searchData = sessionStorage.getItem("searchHistory");
+            localStorage.setItem("searchHistory", JSON.stringify(cityName));
+            console.log(searchHistory)
             
+            const searchBtn = (event) => {
+                event.preventDefault();
+                getCityData(event.target.textContent)
+            }
             
-            for (let i = 0; i < searchData.length; i++) {
-                var searchName = document.createElement("li")
-                searchName.textContent = searchData[i]
-                console.log(searchName);
-            };
+            const showSearch = () => {
+                searchList.innerHTML = " ";
 
-            /*document.querySelector("#cityVal").addEventListener("focus", () => {
-                var data = document.querySelector("datalist#searchdata");
-                data.innerHTML = "";
-                
-                searchHistory.forEach((search) => {
-                    $("#search-list").append(searchName);
-                    data.innerHTML = "<option>" + data.innerHTML;
-                    data.querySelector("option").innerText = search;
-                });
-            });*/
+                for (let i = 0; i < searchHistory.length; i++){
+                    var citySearch = document.createElement("button")
+                    citySearch.classList = "btn-secondary"
+                    citySearch.textContent = (searchHistory[i]);
+                    $(searchList).append(citySearch)
+                    citySearch.addEventListener('click', searchBtn )
+                }
+            }
+
+            showSearch();
         }
 
-    formEl.addEventListener("submit", getCityInfo);
-    formEl.addEventListener("submit", saveSearch);
-   
+    formEl.addEventListener("submit", getCityInfo);  
 });
