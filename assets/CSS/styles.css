@@ -25,4 +25,10 @@
 
 .normal {
     background-color: green;
+    color: white;
+}
+
+.high {
+    background-color: red;
+    color: white;
 }
