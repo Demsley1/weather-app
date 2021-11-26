@@ -107,14 +107,21 @@ $(document).ready(function() {
             windTitle.textContent = ("Wind Speed:  "+ wind + "  MPH");
             var humTitle = document.createElement("span")
             humTitle.textContent = ("Humidity:  " + hum + " %");
-            var uviTitle = document.createElement("span")
-            uviTitle.textContent = ("UV Index:  " + uvi);
+            var uviTitle = $("<p>").text("UV Index:  ")
+            
             // attempt to create if else conditional statement to change color of element depending of value of the uv index
-            if(uvi.value >= 3 && uvi.value <= 5) {
-                uviTitle.classList = "moderate"
+            var uviColor = $("<span>").text(uvi).addClass("moderate");
+            if(uvi > 3 && uvi < 5) {
+                $(uviTitle).append(uviColor);
             }
-            else if (uvi.value < 3) {
-                uviTitle.classList = "normal"
+            else if (uvi < 3) {
+                //$(uviColor).removeClass("moderate")
+                $(uviColor).addClass("normal")
+                $(uviTitle).append(uviColor)
+            }
+            else if (uvi > 5){
+                $(uviColor).addClass("high")
+                $(uviTitle).append(uviColor);
             }
 
             // Append each span to list element container
@@ -197,12 +204,18 @@ $(document).ready(function() {
 
 
     }
+
+        
     
         var saveSearch = (city) => {
-            var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
-            const  cityName = [];
-            cityName.push(city);
+            var searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+  
             searchHistory.indexOf(city) === -1 ? searchHistory.push(city) : []
+
+            for (let i = 0 ; i < searchHistory.length; i++){
+                var cityName = [];
+                cityName.push(city);
+            }
 
             localStorage.setItem("searchHistory", JSON.stringify(cityName));
             console.log(searchHistory)
