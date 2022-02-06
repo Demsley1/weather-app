@@ -1,12 +1,11 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
-
 
 .title {
     color: white;
+    background-image: linear-gradient(to right, rgb(27, 82, 231), black, yellow);
     font-size: 60px;
     font-family: 'Roboto Slab', serif;
-    border: solid 2px black;
+    border-bottom: solid 1px rgba(73, 73, 73, 0.5);
 }
 
 .search {
@@ -15,8 +14,20 @@
     font-weight: bold;
 }
 .search-form {
-    border-bottom: solid black 3px;
+    border-bottom: solid 3px black;
     padding: 20px;
+}
+
+.weather-con {
+    min-height: 400px;
+}
+
+.dwcard {
+    background-image: linear-gradient( to bottom right, rgb(22, 90, 235), rgb(61, 213, 252));
+}
+
+.text-li {
+    font-size: 20px;
 }
 
 .moderate {
