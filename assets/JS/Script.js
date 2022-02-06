@@ -45,7 +45,7 @@
             // create an element for icon representing weather
             var iconEl = document.createElement("img")
             // source picture for icon from openweather website
-            var tempPic = ("http://openweathermap.org/img/wn/"+iconVal+"@2x.png")
+            var tempPic = ("https://openweathermap.org/img/wn/"+iconVal+"@2x.png")
             $(iconEl).attr("src", tempPic);
 
             // append city name, day, and icon image to page
