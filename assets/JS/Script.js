@@ -150,11 +150,11 @@
                     var showDate = dayjs.unix(dDate).format('ddd, MMM DD YYYY');
 
                     var forecastEl = document.createElement("div")
-                    forecastEl.classList = "card border-2 border-dark dwcard m-1";
+                    forecastEl.classList = "card dwcard m-2";
 
                     var forecastTitle = document.createElement('h3')
                     forecastTitle.textContent = (showDate);
-                    forecastTitle.classList = "card-title text-white";
+                    forecastTitle.classList = "card-title text-white m-1";
 
                     var iconEl = document.createElement("img")
                     $(iconEl).attr("src", tempPic)
@@ -195,8 +195,6 @@
             dailyForecast(temp);
             
         }  
-
-
     }
 
         var saveSearch = (city) => {

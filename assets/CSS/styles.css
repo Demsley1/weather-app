@@ -24,6 +24,8 @@
 
 .dwcard {
     background-image: linear-gradient( to bottom right, rgb(22, 90, 235), rgb(61, 213, 252));
+    border: 1px solid rgba(128, 128, 128, 0.507);
+    box-shadow: 5px 5px 12px 2px rgb(112, 105, 105);
 }
 
 .text-li {
